@@ -85,9 +85,6 @@ export default function App() {
                 patientData
             );
 
-            alert(
-                "Patient Added Successfully"
-            );
 
             fetchPatients();
 
@@ -166,7 +163,7 @@ export default function App() {
 
                 <h1 className="text-5xl font-bold text-center mb-10 text-blue-700">
 
-                    Hospital Management System
+                    Arogyam 
 
                 </h1>
 
