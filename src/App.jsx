@@ -66,13 +66,13 @@ export default function App() {
         try {
 
             await axios.post(
-                "http://localhost:8080/patients",
-                {
-                    patientId,
-                    wardType,
-                    days
-                }
-            );
+    "https://hospitalbackend-6jwn.onrender.com/patients",
+    {
+        patientId,
+        wardType,
+        days
+    }
+);
 
             fetchPatients();
 
@@ -95,7 +95,7 @@ export default function App() {
         try {
 
             await axios.delete(
-                `http://localhost:8080/patients/${id}`
+                `https://hospitalbackend-6jwn.onrender.com/patients/${id}`
             );
 
             fetchPatients();
