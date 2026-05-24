@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 
 export default function App() {
 
+    const API =
+        "https://hospitalbackend-6jwn.onrender.com/patients";
+
     // STATES
 
     const [patientId, setPatientId] =
@@ -37,9 +40,7 @@ export default function App() {
         try {
 
             const response =
-                await axios.get(
-                    "https://hospitalbackend-6jwn.onrender.com"
-                );
+                await axios.get(API);
 
             setPatients(response.data);
 
@@ -65,14 +66,28 @@ export default function App() {
 
         try {
 
+            const patientData = {
+
+                patientId:
+                    patientId.trim(),
+
+                wardType:
+                    wardType.trim(),
+
+                days:
+                    Number(days)
+            };
+
+            console.log(patientData);
+
             await axios.post(
-    "https://hospitalbackend-6jwn.onrender.com/patients",
-    {
-        patientId,
-        wardType,
-        days
-    }
-);
+                API,
+                patientData
+            );
+
+            alert(
+                "Patient Added Successfully"
+            );
 
             fetchPatients();
 
@@ -85,6 +100,10 @@ export default function App() {
         } catch (error) {
 
             console.log(error);
+
+            alert(
+                "Error adding patient"
+            );
         }
     };
 
@@ -95,7 +114,7 @@ export default function App() {
         try {
 
             await axios.delete(
-                `https://hospitalbackend-6jwn.onrender.com/patients/${id}`
+                `${API}/${id}`
             );
 
             fetchPatients();
@@ -123,7 +142,9 @@ export default function App() {
 
         let total = 0;
 
-        if (selectedPatient.wardType === "ICU") {
+        if (
+            selectedPatient.wardType === "ICU"
+        ) {
 
             total =
                 selectedPatient.days * 5000;
@@ -143,15 +164,13 @@ export default function App() {
 
             <div className="max-w-7xl mx-auto">
 
-                {/* TITLE */}
-
                 <h1 className="text-5xl font-bold text-center mb-10 text-blue-700">
 
                     Hospital Management System
 
                 </h1>
 
-                {/* FORM SECTION */}
+                {/* FORM */}
 
                 <div className="bg-white rounded-3xl shadow-lg p-8 mb-10">
 
@@ -165,8 +184,6 @@ export default function App() {
                         onSubmit={addPatient}
                         className="space-y-6"
                     >
-
-                        {/* PATIENT ID */}
 
                         <div>
 
@@ -194,8 +211,6 @@ export default function App() {
 
                         </div>
 
-                        {/* WARD TYPE */}
-
                         <div>
 
                             <label className="block text-lg font-medium text-gray-700 mb-3">
@@ -217,15 +232,17 @@ export default function App() {
                                 className="w-full p-4 border rounded-2xl text-lg"
                             >
 
-                                <option>ICU</option>
+                                <option>
+                                    ICU
+                                </option>
 
-                                <option>General Ward</option>
+                                <option>
+                                    General Ward
+                                </option>
 
                             </select>
 
                         </div>
-
-                        {/* DAYS */}
 
                         <div>
 
@@ -253,22 +270,15 @@ export default function App() {
 
                         </div>
 
-                        {/* BUTTONS */}
+                        <button
+                            type="submit"
 
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl text-xl font-semibold"
+                        >
 
-                            <button
-                                type="submit"
+                            Admit Patient
 
-                                className="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl text-xl font-semibold"
-                            >
-
-                                Admit Patient
-
-                            </button>
-                       
-
-                        </div>
+                        </button>
 
                     </form>
 
@@ -297,33 +307,23 @@ export default function App() {
                                     <tr className="bg-blue-100 text-gray-700">
 
                                         <th className="p-5 text-left">
-
                                             Select
-
                                         </th>
 
                                         <th className="p-5 text-left">
-
                                             Patient ID
-
                                         </th>
 
                                         <th className="p-5 text-left">
-
                                             Ward Type
-
                                         </th>
 
                                         <th className="p-5 text-left">
-
                                             Days
-
                                         </th>
 
                                         <th className="p-5 text-left">
-
                                             Actions
-
                                         </th>
 
                                     </tr>
