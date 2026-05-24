@@ -38,7 +38,7 @@ export default function App() {
 
             const response =
                 await axios.get(
-                    "http://localhost:8080/patients"
+                    "https://hospitalbackend-6jwn.onrender.com"
                 );
 
             setPatients(response.data);
