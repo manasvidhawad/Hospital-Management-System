@@ -66,11 +66,7 @@ function App() {
 
         try {
 
-            await axios.delete(
-                API + "/" + id
-            );
-
-            alert("Patient Deleted");
+            await axios.delete(API + "/" + id);
 
             loadPatients();
 
@@ -82,101 +78,162 @@ function App() {
 
     return (
 
-        <div style={{
-            padding: "30px",
-            fontFamily: "Arial"
-        }}>
+        <div
+            style={{
+                minHeight: "100vh",
+                backgroundColor: "#f4f6f9",
+                padding: "40px",
+                fontFamily: "Arial"
+            }}
+        >
 
-            <h1>
-                Hospital Management System
-            </h1>
+            <div
+                style={{
+                    maxWidth: "800px",
+                    margin: "auto",
+                    backgroundColor: "white",
+                    padding: "30px",
+                    borderRadius: "12px",
+                    boxShadow: "0px 0px 10px rgba(0,0,0,0.1)"
+                }}
+            >
 
-            <input
-                type="text"
-                placeholder="Patient ID"
-                value={patientId}
-                onChange={(e) =>
-                    setPatientId(e.target.value)
-                }
-            />
+                <h1
+                    style={{
+                        textAlign: "center",
+                        marginBottom: "30px",
+                        color: "#1e3a8a"
+                    }}
+                >
+                    Hospital Management System
+                </h1>
 
-            <br /><br />
+                <input
+                    type="text"
+                    placeholder="Patient ID"
+                    value={patientId}
+                    onChange={(e) =>
+                        setPatientId(e.target.value)
+                    }
+                    style={inputStyle}
+                />
 
-            <input
-                type="text"
-                placeholder="Ward Type"
-                value={wardType}
-                onChange={(e) =>
-                    setWardType(e.target.value)
-                }
-            />
+                <input
+                    type="text"
+                    placeholder="Ward Type"
+                    value={wardType}
+                    onChange={(e) =>
+                        setWardType(e.target.value)
+                    }
+                    style={inputStyle}
+                />
 
-            <br /><br />
+                <input
+                    type="number"
+                    placeholder="Days"
+                    value={days}
+                    onChange={(e) =>
+                        setDays(e.target.value)
+                    }
+                    style={inputStyle}
+                />
 
-            <input
-                type="number"
-                placeholder="Days"
-                value={days}
-                onChange={(e) =>
-                    setDays(e.target.value)
-                }
-            />
+                <button
+                    onClick={admitPatient}
+                    style={buttonStyle}
+                >
+                    Admit Patient
+                </button>
 
-            <br /><br />
+                <h2
+                    style={{
+                        marginTop: "40px",
+                        marginBottom: "20px"
+                    }}
+                >
+                    Patient Records
+                </h2>
 
-            <button onClick={admitPatient}>
-                Admit Patient
-            </button>
+                {
+                    patients.map((p) => (
 
-            <hr />
-
-            <h2>
-                Patient Records
-            </h2>
-
-            {
-                patients.map((p) => (
-
-                    <div
-                        key={p.patientId}
-                        style={{
-                            border: "1px solid black",
-                            margin: "10px",
-                            padding: "10px"
-                        }}
-                    >
-
-                        <p>
-                            Patient ID:
-                            {p.patientId}
-                        </p>
-
-                        <p>
-                            Ward:
-                            {p.wardType}
-                        </p>
-
-                        <p>
-                            Days:
-                            {p.days}
-                        </p>
-
-                        <button
-                            onClick={() =>
-                                deletePatient(
-                                    p.patientId
-                                )
-                            }
+                        <div
+                            key={p.patientId}
+                            style={{
+                                border: "1px solid #ddd",
+                                borderRadius: "10px",
+                                padding: "20px",
+                                marginBottom: "15px",
+                                backgroundColor: "#fafafa"
+                            }}
                         >
-                            Delete
-                        </button>
 
-                    </div>
-                ))
-            }
+                            <p>
+                                <strong>Patient ID:</strong>
+                                {" "}
+                                {p.patientId}
+                            </p>
+
+                            <p>
+                                <strong>Ward:</strong>
+                                {" "}
+                                {p.wardType}
+                            </p>
+
+                            <p>
+                                <strong>Days:</strong>
+                                {" "}
+                                {p.days}
+                            </p>
+
+                            <button
+                                onClick={() =>
+                                    deletePatient(
+                                        p.patientId
+                                    )
+                                }
+                                style={deleteButtonStyle}
+                            >
+                                Delete
+                            </button>
+
+                        </div>
+                    ))
+                }
+
+            </div>
 
         </div>
     );
 }
+
+const inputStyle = {
+    width: "100%",
+    padding: "12px",
+    marginBottom: "15px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "16px"
+};
+
+const buttonStyle = {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "16px",
+    cursor: "pointer"
+};
+
+const deleteButtonStyle = {
+    backgroundColor: "#dc2626",
+    color: "white",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "6px",
+    cursor: "pointer"
+};
 
 export default App;
