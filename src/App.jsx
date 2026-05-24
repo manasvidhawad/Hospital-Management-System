@@ -42,11 +42,11 @@ function App() {
                 {
                     patientId,
                     wardType,
-                    days: parseInt(days)
+                    days
                 }
             );
 
-            alert("Patient Added Successfully");
+            alert("Patient Added");
 
             setPatientId("");
             setWardType("");
@@ -70,8 +70,6 @@ function App() {
                 API + "/" + id
             );
 
-            alert("Patient Deleted");
-
             loadPatients();
 
         } catch (error) {
@@ -92,7 +90,6 @@ function App() {
             </h1>
 
             <input
-                type="text"
                 placeholder="Patient ID"
                 value={patientId}
                 onChange={(e) =>
@@ -103,7 +100,6 @@ function App() {
             <br /><br />
 
             <input
-                type="text"
                 placeholder="Ward Type"
                 value={wardType}
                 onChange={(e) =>
@@ -114,7 +110,6 @@ function App() {
             <br /><br />
 
             <input
-                type="number"
                 placeholder="Days"
                 value={days}
                 onChange={(e) =>
